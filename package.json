@@ -23,5 +23,8 @@
   "homepage": "https://github.com/jsapro/movies-explorer-api#readme",
   "prettier": {
     "singleQuote": true
+  },
+  "dependencies": {
+    "mongoose": "^7.4.2"
   }
 }
