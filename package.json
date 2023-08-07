@@ -25,6 +25,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "mongoose": "^7.4.2"
+    "mongoose": "^7.4.2",
+    "validator": "^13.11.0"
   }
 }
