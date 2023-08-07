@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/jsapro/movies-explorer-api/issues"
   },
-  "homepage": "https://github.com/jsapro/movies-explorer-api#readme"
+  "homepage": "https://github.com/jsapro/movies-explorer-api#readme",
+  "prettier": {
+    "singleQuote": true
+  }
 }
