@@ -4,8 +4,10 @@ const { errors } = require('celebrate');
 const { MONGO_URL, PORT } = require('./utils/config');
 const router = require('./routes');
 const { finalErrorHandler } = require('./middlewares/finalErrorHandler');
-
 const app = express();
+
+// const { constants } = require('http2');
+// console.log(constants)
 
 mongoose
   .connect(MONGO_URL, {
