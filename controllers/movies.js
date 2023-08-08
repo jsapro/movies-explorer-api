@@ -8,26 +8,25 @@ const ForbiddenErr = require('../utils/errors/ForbiddenErr');
 module.exports.getMovies = (req, res, next) => {
   const ownerId = req.user._id;
   Movie.find({ owner: ownerId })
-    .then((movies) => res.send({ data: movies }))
+    .then((movies) => {
+      res.send({ data: movies });
+    })
     .catch(next);
 };
 
 module.exports.postMovie = (req, res, next) => {
-  Movie.create({ owner: req.user._id, ...req.body }).then((movie) => {
-    res
-      .status(constants.HTTP_STATUS_CREATED)
-      .send({ data: movie })
-      .catch((err) => {
-        if (err instanceof mongoose.Error.ValidationError) {
-          return next(
-            new BadRequestErr(
-              'Переданы некорректные данные при создании фильма'
-            )
-          );
-        }
-        return next(err);
-      });
-  });
+  Movie.create({ owner: req.user._id, ...req.body })
+    .then((movie) => {
+      res.status(constants.HTTP_STATUS_CREATED).send({ data: movie });
+    })
+    .catch((err) => {
+      if (err instanceof mongoose.Error.ValidationError) {
+        return next(
+          new BadRequestErr('Переданы некорректные данные при создании фильма')
+        );
+      }
+      return next(err);
+    });
 };
 
 module.exports.deleteMovie = (req, res, next) => {
