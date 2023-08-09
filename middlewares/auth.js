@@ -3,7 +3,9 @@ const UnAuthorizedErr = require('../utils/errors/UnAuthorizedErr');
 const { JWT_SECRET, NODE_ENV } = require('../utils/config');
 
 const handleAuthError = () => {
-  new UnAuthorizedErr('Токен недействителен, необходимо получить доступ');
+  return new UnAuthorizedErr(
+    'Токен недействителен, необходимо получить доступ'
+  );
 };
 
 const auth = (req, res, next) => {
