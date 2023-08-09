@@ -3,12 +3,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
+const cors = require('cors');
 const { MONGO_URL, PORT, rateLimiter } = require('./utils/config');
 const router = require('./routes');
 const { finalErrorHandler } = require('./middlewares/finalErrorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+
+app.use(cors());
 
 mongoose
   .connect(MONGO_URL, {
