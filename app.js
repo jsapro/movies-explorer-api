@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const { MONGO_URL, PORT } = require('./utils/config');
+const { MONGO_URL, PORT, rateLimiter } = require('./utils/config');
 const router = require('./routes');
 const { finalErrorHandler } = require('./middlewares/finalErrorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -23,6 +23,7 @@ mongoose
 
 // помогает защитить приложение от веб-уязвимостей путем соответствующей настройки заголовков HTTP
 app.use(helmet());
+app.use(rateLimiter); // Apply the rate limiting middleware to all requests
 
 app.use(express.json()); // вместо bodyParser
 app.use(express.urlencoded({ extended: true }));
