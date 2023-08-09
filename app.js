@@ -4,10 +4,8 @@ const { errors } = require('celebrate');
 const { MONGO_URL, PORT } = require('./utils/config');
 const router = require('./routes');
 const { finalErrorHandler } = require('./middlewares/finalErrorHandler');
-const app = express();
 
-// const { constants } = require('http2');
-// console.log(constants)
+const app = express();
 
 mongoose
   .connect(MONGO_URL, {
@@ -24,7 +22,6 @@ app.use(express.json()); // вместо bodyParser
 app.use(express.urlencoded({ extended: true }));
 
 app.use(router);
-
 
 app.use(errors()); // обработчик ошибок celebrate
 app.use(finalErrorHandler);

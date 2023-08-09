@@ -50,5 +50,5 @@ module.exports = {
   validateRegister,
   validateUser,
   validateMovie,
-  validateMovieId
+  validateMovieId,
 };

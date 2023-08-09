@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 const { constants } = require('http2');
+const mongoose = require('mongoose');
 const Movie = require('../models/movie');
 const BadRequestErr = require('../utils/errors/BadRequestErr');
 const NotFoundErr = require('../utils/errors/NotFoundErr');
@@ -22,7 +22,7 @@ module.exports.postMovie = (req, res, next) => {
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         return next(
-          new BadRequestErr('Переданы некорректные данные при создании фильма')
+          new BadRequestErr('Переданы некорректные данные при создании фильма'),
         );
       }
       return next(err);
@@ -41,7 +41,7 @@ module.exports.deleteMovie = (req, res, next) => {
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
         return new BadRequestErr(
-          'Переданы некорректные данные для получения фильма'
+          'Переданы некорректные данные для получения фильма',
         );
       }
       return next(err);
