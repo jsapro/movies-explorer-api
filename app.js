@@ -5,6 +5,7 @@ const { errors } = require('celebrate');
 const { MONGO_URL, PORT } = require('./utils/config');
 const router = require('./routes');
 const { finalErrorHandler } = require('./middlewares/finalErrorHandler');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
@@ -22,8 +23,10 @@ mongoose
 app.use(express.json()); // вместо bodyParser
 app.use(express.urlencoded({ extended: true }));
 
+app.use(requestLogger);
 app.use(router);
 
+app.use(errorLogger);
 app.use(errors()); // обработчик ошибок celebrate
 app.use(finalErrorHandler);
 
