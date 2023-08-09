@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 const { MONGO_URL, PORT } = require('./utils/config');
 const router = require('./routes');
 const { finalErrorHandler } = require('./middlewares/finalErrorHandler');
@@ -19,6 +20,9 @@ mongoose
   .catch((err) => {
     console.log(`Ошибка mongoose.connect: ${err.message}`);
   });
+
+// помогает защитить приложение от веб-уязвимостей путем соответствующей настройки заголовков HTTP
+app.use(helmet());
 
 app.use(express.json()); // вместо bodyParser
 app.use(express.urlencoded({ extended: true }));
