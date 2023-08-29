@@ -94,6 +94,11 @@ module.exports.updateUser = (req, res, next) => {
           ),
         );
       }
+      if (err.code === 11000) {
+        return next(
+          new ConflictErr('Пользователь с данным e-mail уже зарегистрирован'),
+        );
+      }
       return next(err);
     });
 };
